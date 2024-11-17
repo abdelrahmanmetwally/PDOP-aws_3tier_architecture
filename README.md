@@ -10,16 +10,13 @@
 
 Looking for more videos on AWS and DevOps follow me on youtube here [![YouTube Channel](https://img.shields.io/badge/YouTube-Channel-red?logo=youtube&style=flat-square)](https://www.youtube.com/@avizway)
 
+## Used Services:
+- VPC(including subnets, routes tables, nat gateway , security groups),EC2,S3,application load balancer, auto scaling groups,RDS,IAM Roles
 
+## Three-Tier Architecture
 
-![Three-Tier Architecture](https://avinash.s3.amazonaws.com/3tier.png)
+![Three-Tier Architecture](image.png)
 
-
-### Overview
-In this architecture, we have three main layers:
-1. **Web Tier**: Handles client requests and serves the front-end website.
-2. **Application Tier**: Processes API requests and handles the business logic.
-3. **Database Tier**: Manages data storage and retrieval.
 
 ### Components explanation
 
@@ -55,7 +52,7 @@ In this architecture, we have three main layers:
   - **Database Interaction**: Interacts with the Aurora MySQL database to fetch or update data.
   - **Returning Responses**: Sends the processed data back to the web tier via the internal load balancer.
 
-#### 5. Database Tier (Aurora MySQL Multi-AZ Database)
+#### 5. Database Tier ( RDS: MySQL )
 - **Role**: Provides reliable and scalable data storage.
 - **Functionality**:
   - **Data Storage**: Stores all the application data in a structured format.
@@ -70,31 +67,12 @@ In this architecture, we have three main layers:
   - **Web Tier**: The external load balancer distributes traffic to web servers.
   - **Application Tier**: The internal load balancer distributes API requests to application servers.
 
-#### Health Checks
-- **Purpose**: Continuously monitors the health of instances to ensure only healthy instances receive traffic.
-- **Implementation**:
-  - **Web Tier**: Health checks by the external load balancer to ensure web servers are responsive.
-  - **Application Tier**: Health checks by the internal load balancer to ensure application servers are operational.
 
 #### Auto Scaling Groups
 - **Purpose**: Automatically adjusts the number of running instances based on traffic load to maintain performance and cost efficiency.
 - **Implementation**:
   - **Web Tier**: Auto-scaling based on metrics like CPU usage or request count to add or remove web server instances.
   - **Application Tier**: Auto-scaling based on similar metrics to adjust the number of application server instances.
-
-#### AWS Certificate Manager (ACM)
-- **Purpose**: Manages SSL/TLS certificates to secure data in transit between clients and your application, ensuring encrypted communication.
-- **Implementation**:
-  - **Certificate Provisioning**: ACM provides and manages SSL/TLS certificates for your domain `learnaws.co.in`.
-  - **Certificate Deployment**: The ACM certificates are associated with the public-facing Application Load Balancer (ALB) to enable HTTPS traffic.
-  - **Automatic Renewal**: ACM automatically renews certificates before they expire, ensuring uninterrupted secure connections.
-
-#### Amazon Route 53
-- **Purpose**: Manages DNS records and directs user traffic to the appropriate AWS resources, optimizing for performance and reliability.
-- **Implementation**:
-  - **DNS Management**: Route 53 handles DNS queries for the domain `learnaws.co.in`, translating it into IP addresses for your Application Load Balancer.
-  - **Traffic Routing**: Route 53 directs client requests to the public-facing Application Load Balancer based on DNS records.
-  - **Health Checks and Failover**: Optionally, Route 53 performs health checks on your endpoints and can automatically reroute traffic to healthy resources if needed.
 
 
 ### Summary
